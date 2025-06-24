@@ -1,15 +1,17 @@
 const express = require('express');
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const tasksRouter = require('./view/task.view');
+const dotenv = require('dotenv');
+
 
 app.use(express.json());
 const mongoose = require('mongoose');
+dotenv.config();
 
-const uri = 'mongodb+srv://mjrajak47z:H3Pkg3GTHrbWmJDd@cluster0.ht39vu6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
-mongoose.connect(uri)
+mongoose.connect(process.env.MONGO)
 .then(() => {
     console.log("Connected to MongoDB successfully");
 })
